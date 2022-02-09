@@ -18,9 +18,9 @@ LIMIT ${process.argv[3] || 5};
 `
   )
   .then(res => {
-    res.rows.forEach(user => {
+    res.rows.forEach(row => {
       console.log(
-        `${user.name} has an id of ${user.id} and was in the ${user.cohort_name} cohort`
+        `${row.name} has an id of ${row.id} and was in the ${row.cohort_name} cohort`
       );
     });
   })
