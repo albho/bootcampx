@@ -13,7 +13,8 @@ pool
 SELECT students.id, students.name, cohorts.name AS cohort_name
 FROM students
   INNER JOIN cohorts ON students.cohort_id = cohorts.id
-LIMIT 5;
+  WHERE cohorts.name LIKE '%${process.argv[2]}%'
+LIMIT ${process.argv[3] || 5};
 `
   )
   .then(res => {
@@ -22,4 +23,5 @@ LIMIT 5;
         `${user.name} has an id of ${user.id} and was in the ${user.cohort_name} cohort`
       );
     });
-  });
+  })
+  .catch(err => console.error("query error", err.stack));
